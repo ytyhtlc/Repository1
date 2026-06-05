@@ -1,0 +1,33 @@
+# --------------- 通用忽略规则 ---------------
+# 操作系统生成的文件
+.DS_Store          # Mac系统自带文件
+Thumbs.db          # Windows系统缩略图文件
+*.tmp              # 临时文件
+*.log              # 日志文件
+
+# IDE 和编辑器配置
+.vscode/           # VSCode配置
+.idea/             # IDEA配置
+*.suo              # Visual Studio相关配置
+*.iml              # IDEA相关配置
+
+# --------------- 嵌入式/C语言专属 ---------------
+# 编译生成的目录和文件（根据你之前的项目结构）
+DebugConfig/       # 调试配置
+Listings/          # 编译列表文件
+Objects/           # 编译生成的目标文件
+build/             # 构建产物目录
+dist/              # 打包产物
+
+# Keil MDK 用户专属配置（含个人电脑名的文件）
+*.uvguix.*         # 忽略所有 uvguix 文件（解决乱码问题）
+project.uvoptx     # 用户工程选项文件
+
+# --------------- 其他语言/框架（备用） ---------------
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# 前端
+node_modules/
