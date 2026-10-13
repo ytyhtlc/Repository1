@@ -1,7 +1,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "Delay.h"
 #include "OLED.h"
-#include "MyIIC.h"
+#include "MYIIC.h"
 #include "MPU6050.h"
 #include "timer.h"
 #include "motor.h"
