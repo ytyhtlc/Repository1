@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>姿态屏保</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <main id="lobby">
+    <p class="eyebrow">Ubuntu 屏保</p>
+    <h1>自动待命，手动也能立刻打开</h1>
+    <p class="lead">2D 看拍打的轻重换表情。3D 看电脑的转动和平移换视角。有加速度计就用真机，没有就用下面的虚拟姿态。</p>
+
+    <div class="modes" role="radiogroup" aria-label="屏保种类">
+      <button type="button" class="card selected" id="mode-2d" data-mode="2d">
+        <span>2D 动态</span>
+        <strong>拍打换表情</strong>
+        <em>轻拍眨眼，稍重惊讶，再重生气，很重就头晕。</em>
+      </button>
+      <button type="button" class="card" id="mode-3d" data-mode="3d">
+        <span>3D</span>
+        <strong>姿态换视角</strong>
+        <em>左右转动改变朝向，平移改变机位。</em>
+      </button>
+    </div>
+
+    <section class="panel">
+      <label>人物
+        <select id="character">
+          <option value="pobo">小泊</option>
+          <option value="page">页页</option>
+          <option value="custom">我指定的图片或模型</option>
+        </select>
+      </label>
+      <label class="file">图片（2D）
+        <input id="photo" type="file" accept="image/*">
+      </label>
+      <label class="file">模型（3D，glb）
+        <input id="model" type="file" accept=".glb,.gltf,model/gltf-binary">
+      </label>
+      <label>拍打灵敏度 <output id="sens-out">1.0</output>
+        <input id="sensitivity" type="range" min="0.6" max="1.8" step="0.1" value="1">
+      </label>
+      <label class="check"><input id="auto" type="checkbox" checked> 空闲后自动进入</label>
+      <label>空闲秒数
+        <input id="idle" type="number" min="5" max="3600" value="90">
+      </label>
+      <p id="sensor" class="sensor">正在查看加速度计…</p>
+    </section>
+
+    <button type="button" class="start" id="start">现在开始</button>
+  </main>
+
+  <section id="stage" hidden>
+    <canvas id="c2d"></canvas>
+    <canvas id="c3d"></canvas>
+    <div id="hud">
+      <div id="laptop" aria-hidden="true"><i></i></div>
+      <p id="hud-expression">表情：平静</p>
+      <p id="hud-pose">旋转：水平</p>
+      <p id="hud-pan">平移：居中</p>
+    </div>
+    <div id="clock"></div>
+    <div id="controls">
+      <div>
+        <button type="button" id="tilt-left">左倾</button>
+        <button type="button" id="tilt-right">右倾</button>
+        <button type="button" id="tilt-forward">前倾</button>
+        <button type="button" id="tilt-back">后仰</button>
+        <button type="button" id="tilt-reset">回正</button>
+      </div>
+      <div>
+        <button type="button" id="pan-left">左移</button>
+        <button type="button" id="pan-right">右移</button>
+        <button type="button" id="pan-forward">前移</button>
+        <button type="button" id="pan-back">后移</button>
+      </div>
+      <div>
+        <button type="button" id="tap-light">轻拍</button>
+        <button type="button" id="tap-mid">中拍</button>
+        <button type="button" id="tap-hard">重拍</button>
+        <button type="button" id="exit">退出</button>
+      </div>
+    </div>
+  </section>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
